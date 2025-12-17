@@ -51,3 +51,12 @@ Safety: Strict Ownership model ensures automatic memory cleanup without Garbage 
 Implement rayon for parallel processing (multi-core support).
 
 Switch to zero-copy deserialization (&str) to further reduce CPU time.
+
+## Engineering Decisions: Why Single-Threaded?
+
+During optimization, I benchmarked a **Multi-Threaded** approach using `rayon`.
+
+- **Hypothesis:** Parallel processing would improve performance on a multi-core machine.
+- **Result:** Performance **degraded** (1.29s -> 3.60s).
+- **Root Cause:** The overhead of allocating 10 million Structs into RAM (to enable parallelism) outweighed the CPU gains.
+- **Conclusion:** For ETL tasks where data is larger than cache, **Streaming (Iterator)** is superior to **Batch Processing** because it minimizes memory allocation overhead.
