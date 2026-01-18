@@ -1,0 +1,48 @@
+Month,Date,Start Time,End Time,Hours,Work Description,Weekly Total Hours
+Dec 2025,"Dec 2, 2025",10:00,14:00,4,"Studied Rust fundamentals including ownership, borrowing, and basic syntax",20
+Dec 2025,"Dec 3, 2025",10:00,14:00,4,Continued Rust fundamentals and explored Rust tooling,20
+Dec 2025,"Dec 4, 2025",10:00,14:00,4,Worked on creating an AI-produced Rust Body of Knowledge (BOK),20
+Dec 2025,"Dec 5, 2025",10:00,14:00,4,Expanded Rust BOK with structured notes and examples,20
+Dec 2025,"Dec 6, 2025",10:00,14:00,4,Reviewed Rust concepts and refined documentation,20
+Dec 2025,"Dec 8, 2025",10:00,14:00,4,Designed and implemented a basic CLI chatbot project in Rust,20
+Dec 2025,"Dec 9, 2025",10:00,14:00,4,Integrated LLM functionality into the Rust CLI chatbot,20
+Dec 2025,"Dec 10, 2025",10:00,14:00,4,Improved chatbot logic and tested Rust + AI integration,20
+Dec 2025,"Dec 11, 2025",10:00,14:00,4,Debugged and refined Rust code,20
+Dec 2025,"Dec 12, 2025",10:00,14:00,4,Gained hands-on experience using Rust with AI systems,20
+Dec 2025,"Dec 15, 2025",10:00,14:00,4,Continued learning Rust fundamentals,20
+Dec 2025,"Dec 16, 2025",10:00,14:00,4,Designed the rust-log-blaster project,20
+Dec 2025,"Dec 17, 2025",10:00,14:00,4,Implemented Rust version for data analysis efficiency testing,20
+Dec 2025,"Dec 18, 2025",10:00,14:00,4,Implemented Python comparison program,20
+Dec 2025,"Dec 19, 2025",10:00,14:00,4,"Compared performance results, Rust outperformed Python",20
+Dec 2025,"Dec 22, 2025",10:00,14:00,4,Studied Rust programming concepts,20
+Dec 2025,"Dec 23, 2025",10:00,14:00,4,Worked through Rustlings workbook exercises,20
+Dec 2025,"Dec 24, 2025",10:00,14:00,4,Continued Rustlings exercises for hands-on experience,20
+Dec 2025,"Dec 25, 2025",10:00,14:00,4,Focused on understanding Rust nuances relevant to AI projects,20
+Dec 2025,"Dec 26, 2025",10:00,14:00,4,Applied Rust learnings to AI-related use cases,20
+Jan 2026,"Jan 5, 2026",14:00,18:00,4,Developed a plan to build Rust projects with AI,20
+Jan 2026,"Jan 6, 2026",10:00,14:00,4,Designed system architecture and workflows,20
+Jan 2026,"Jan 7, 2026",10:00,14:00,4,"Identified tools, libraries, and learning gaps",20
+Jan 2026,"Jan 8, 2026",10:00,14:00,4,Continued Rustlings exercises,20
+Jan 2026,"Jan 9, 2026",10:00,14:00,4,Refined AI integration strategy,20
+Jan 2026,"Jan 12, 2026",10:00,14:00,4,Rustlings exercises focused on functions,20
+Jan 2026,"Jan 13, 2026",10:00,14:00,4,Debugged broken Rust code and practiced exercises,20
+Jan 2026,"Jan 14, 2026",10:00,14:00,4,Learned and implemented the CLAP library,20
+Jan 2026,"Jan 15, 2026",10:00,14:00,4,Improved the rust-log-blaster application -> From reading hardcoded input files to reading customer user input files using the CLAP,20
+Jan 2026,"Jan 16, 2026",10:00,14:00,4,"Updated README, pushed code to Git, and planned next steps for the coming week (implementation of unit tests, integrating flamegraph to visualize CPU usage)",20
+Jan 2026,"Jan 19, 2026",,,,,
+Jan 2026,"Jan 20, 2026",,,,,
+Jan 2026,"Jan 21, 2026",,,,,
+Jan 2026,"Jan 22, 2026",,,,,
+Jan 2026,"Jan 23, 2026",,,,,
+Jan 2026,"Jan 26, 2026",,,,,
+Jan 2026,"Jan 27, 2026",,,,,
+Jan 2026,"Jan 28, 2026",,,,,
+Jan 2026,"Jan 29, 2026",,,,,
+Jan 2026,"Jan 30, 2026",,,,,
+Feb 2026,"Feb 2, 2026",,,,,
+Feb 2026,"Feb 3, 2026",,,,,
+Feb 2026,"Feb 4, 2026",,,,,
+Feb 2026,"Feb 5, 2026",,,,,
+Feb 2026,"Feb 6, 2026",,,,,
+Feb 2026,"Feb 9, 2026",,,,,
+Feb 2026,"Feb 10, 2026",,,,,

@@ -1,44 +1,50 @@
-# Rust Log Blaster 🚀
+# Rust Log Blaster
 
-A high-performance, memory-safe **CLI tool** for log processing built in Rust. It demonstrates an ETL (Extract, Transform, Load) pipeline that streams data from massive CSV files with minimal memory overhead.
+A high-performance, memory-safe **Hybrid System** for log processing. It functions as both a standalone **CLI tool** and a **high-speed Python extension**.
 
-> **Key Feature:** Now supports **Batch Processing**. You can feed it multiple log files (e.g., daily logs) and it will process them sequentially without crashing, even if one file is corrupt.
+It demonstrates an ETL (Extract, Transform, Load) pipeline that streams data from massive CSV files with minimal memory overhead, bridging the gap between Python's ease of use and Rust's raw speed.
 
 ## Performance Benchmark (Python VS Rust)
 
-| Language   | Execution Time (500MB File) | Speedup  |
-| ---------- | --------------------------- | -------- |
-| **Python** | **4.21s**                   | **1x**   |
-| **Rust**   | **1.29s**                   | **3.2x** |
+_Benchmark run on a ~500MB dataset._
 
-## Usage (CLI)
+| Implementation  | Execution Time | Speedup  |
+| --------------- | -------------- | -------- |
+| **Pure Python** | **11.13s**     | **1x**   |
+| **Rust Plugin** | **2.55s**      | **4.4x** |
 
-This tool uses `clap` for a robust command-line interface.
+> **Result:** The Rust implementation is over **400% faster** while maintaining the exact same Python developer experience.
 
-**1. Basic Usage:**
+## Usage (Two Modes)
+
+### 1. The Engineer's Mode (CLI)
+
+Written in Rust, using `clap` for robust argument parsing.
 
 ```bash
 # Process a single specific file
-cargo run --release -- --filenames my_log.csv
+cargo run --release -- large_log.csv
 
-```
-
-**2. Batch Processing (New!):**
-
-```bash
-# Process multiple files in one go
+# Batch Process multiple files (Fault Tolerant)
 cargo run --release -- server_log_1.csv server_log_2.csv
 
 ```
 
-**3. View Help:**
+### 2. The Data Scientist's Mode (Python Library)
 
-```bash
-cargo run --release -- --help
+Exposes the Rust logic as a native Python module using **PyO3**.
+
+```python
+import rust_log_blaster
+
+# Looks like Python, runs like C++
+# Returns the count of ERROR logs instantly
+count = rust_log_blaster.rust_log_count("large_log.csv")
+print(f"Errors found: {count}")
 
 ```
 
-## Workflow
+## Workflow & Architecture
 
 Unlike tools that load the entire file into RAM (like Pandas), Log Blaster uses a **Streaming Iterator**. It holds only one row in memory at a time.
 
@@ -53,7 +59,7 @@ flowchart LR
     end
 
     subgraph CPU [Processor]
-        ArgParse[("CLAP Argument Parser")]
+        ArgParse[("Interface (CLI or Python)")]
         Logic{"Is Level == ERROR?"}
         Count[("Counter ++")]
         DropNode["Drop Data"]
@@ -70,25 +76,36 @@ flowchart LR
 
 ## Tech Stack
 
-- **Language:** Rust (Edition 2021)
-- **CLI Interface:** `clap` (Command Line Argument Parser) - _Added for robust user input._
-- **Core Logic:** `csv` crate for reliable parsing.
-- **Data Handling:** `serde` for type-safe deserialization.
-- **Safety:** Strict Ownership model ensures automatic memory cleanup.
+- **Core Language:** Rust (Edition 2021)
+- **Integration:** `pyo3` (Rust-to-Python bindings) & `maturin` (Build system).
+- **CLI Interface:** `clap` (Command Line Argument Parser).
+- **Data Handling:** `csv` & `serde` (Zero-copy deserialization).
+- **Optimization:** LTO (Link Time Optimization) enabled for release builds.
 
 ## Engineering Evolution (Changelog)
 
 - **v1.0 (Script):** Hardcoded filepath, single file processing.
-- **v1.1 (CLI Tool):** Integrated `clap` to support dynamic arguments.
-- Added **Batch Processing** (Vectorized inputs).
-- Implemented **Fault Tolerance** (Process continues even if one file fails).
-- Added Struct-based Type Safety.
+- **v1.1 (CLI Tool):** Integrated `clap` for dynamic arguments and batch processing. Added fault tolerance (skips corrupt files).
+- **v2.0 (Hybrid Engine):** Refactored core logic into a shared library (`lib.rs`). Implemented **FFI (Foreign Function Interface)** to allow Python scripts to call Rust directly, achieving a 4.4x speedup.
 
-## Engineering Decisions: Why Single-Threaded?
+## Engineering Decisions
 
-During optimization, I benchmarked a **Multi-Threaded** approach using `rayon`.
+### Why Streaming vs. Loading?
 
-- **Hypothesis:** Parallel processing would improve performance on a multi-core machine.
-- **Result:** Performance **degraded** (1.29s -> 1.94s).
-- **Root Cause:** The overhead of allocating 10 million Structs into RAM (to enable parallelism) outweighed the CPU gains.
-- **Conclusion:** For ETL tasks where data is larger than cache, **Streaming (Iterator)** is superior to **Batch Processing** because it minimizes memory allocation overhead.
+For ETL tasks where data is larger than CPU cache, **Streaming (Iterator)** is superior to **Batch Loading**. It minimizes memory allocation overhead (heap churn), keeping the application memory footprint tiny (~2MB) regardless of file size.
+
+### Why Hybrid Python/Rust?
+
+Data Science teams prefer Python for its ecosystem, but Python struggles with massive loops. By offloading the heavy `for` loop to Rust and wrapping it in PyO3, we get "C++ performance" without forcing the Data Science team to learn a new language.
+
+### Installation (Python Module)
+
+To compile the Rust code as a Python library:
+
+```bash
+# Requires Maturin
+maturin develop --release
+
+```
+
+---
